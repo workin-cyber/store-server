@@ -2,13 +2,16 @@ require('../db').connect();
 
 const { orderModel } = require('../models/order')
 
+
 async function create(data) {
     const res = await orderModel.create(data);
     console.log(res);
 }
 async function read(filter, proj) {
-    const res = await orderModel.find(filter, proj);
-    console.log(res);
+    const res = await orderModel.find(filter, proj)
+    .populate('userId')
+    .populate('items.itemId');
+    console.log(res[0].items);
 }
 async function update(filter, newData) {
     const res = await orderModel.updateOne(filter, newData);
@@ -22,10 +25,17 @@ async function update(filter, newData) {
 
 module.exports = { create, read, update }
 
+const order = {
+    totalPrice: 100,
+    userId: "629f31f72b63a0a2693f86d7",
+    items: [{
+        itemId: "62a83c0f126ef05e4abc3396",
+        qty: 6
+    }],
+}
 
-// const order = {
-//     userId: SchemaTypes.ObjectId("62a5f09c1926d8295c8bc935"),
-//     items: [{ itemId: SchemaTypes.ObjectId("62a5f09c1926d8295c8bc935"), qty: 5 }, { itemId: "62a5f09c1926d8295c8bc935", qty: 4 }]
+// create(order)
 
-// }
-// orderModel.create(order)
+read({
+    _id : '62a83dd1f13fb8afeaff3162'
+})

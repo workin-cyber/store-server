@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const {SchemaTypes} = mongoose
+require('./user')
+require('./item')
 
 const orderSchema = new mongoose.Schema({
     orderDate: {

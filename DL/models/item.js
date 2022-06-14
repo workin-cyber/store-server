@@ -18,7 +18,7 @@ const itemSchema = new mongoose.Schema({
         required: true
     },
     barcode: {
-        type: string,
+        type: String,
         required: true,
         unique: true
     },
@@ -44,7 +44,7 @@ const itemSchema = new mongoose.Schema({
 })
 
 
-const itemModel = mongoose.model('Item', itemSchema);
+const itemModel = mongoose.model('item', itemSchema);
 module.exports = { itemModel }
 // module.exports.userModel = userModel
 
