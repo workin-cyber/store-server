@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
+const {SchemaTypes} = mongoose
 
 const orderSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        // required: true
-    },
-
     orderDate: {
         type: Date,
         default: Date.now
@@ -16,17 +12,13 @@ const orderSchema = new mongoose.Schema({
         // required: true
     },
     userId: {
-        type: mongoose.SchemaTypes.ObjectId,
+        type: SchemaTypes.ObjectId,
         ref: 'user'
     },
     items: [{
-        itemId: { type: mongoose.SchemaTypes.ObjectId, ref: 'item' },
-        qty: { type: Number, required: true }
+        itemId: { type: SchemaTypes.ObjectId, ref: 'item' },
+        qty: { type: Number, required: true, default: 1 }
     }],
-    // token: {
-    //     type: String,
-    //     required: true,
-    //     select: false
 
 
 })
@@ -34,10 +26,3 @@ const orderSchema = new mongoose.Schema({
 
 const orderModel = mongoose.model('order', orderSchema);
 module.exports = { orderModel }
-
-const order = {
-    userId: "62a5f09c1926d8295c8bc935",
-    items: [{ itemId: "62a5f09c1926d8295c8bc935", qty: 5 }, { itemId: "62a5f09c1926d8295c8bc935", qty: 4 }]
-
-}
-orderModel.create(order)

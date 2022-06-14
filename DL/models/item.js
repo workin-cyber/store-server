@@ -17,37 +17,30 @@ const itemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    id: {
-        type: Number,
+    barcode: {
+        type: string,
         required: true,
         unique: true
     },
     img: {
         type: String,
-        default: "https://m.media-amazon.com/images/I/81Kbu9FfN+L._AC_SL1500_.jpg"
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
-    category: [{
+    category: {
         type: String
-    }],
-    // token: {
-    //     type: String,
-    //     required: true,
-    //     select: false
-    // },
-    inStock: {
-        type: Number,  //
-        required: true,
     },
-    permission: {
-        type: String,
-        enum: ['viewer', 'editor', 'admin'],
-        default: 'viewer'
-    }
-
+    inStock: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
 })
 
 
