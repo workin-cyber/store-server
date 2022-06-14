@@ -1,18 +1,18 @@
-require('../db').connect();
+require('../DL/db').connect();
 const userController = require('../DL/controllers/userController')
 
-async function getUserDetailsById(id){
+async function getUserDetailsById(id) {
 
-    // userController.create()
+    await userController.create({ email: "Yon@walla.com" })
 
     // find
     // check if null or exist
     // return error / user {}
-    
+
 
 }
 
-async function register(){
-    // many many many validations
+// async function register() {
+//     // many many many validations
 
-}
+// }

@@ -1,12 +1,13 @@
+require('../db').connect();
 
 const { userModel } = require('../models/user')
 
 async function create(data) {
-   const res = await userModel.create(data);
+    const res = await userModel.create(data);
     console.log(res);
 }
-async function read(filter) {
-    const res = await userModel.find(filter);
+async function read(filter, proj) {
+    const res = await userModel.find(filter, proj);
     console.log(res);
 }
 async function update(filter, newData) {
@@ -15,7 +16,7 @@ async function update(filter, newData) {
     return res;
 }
 async function del(filter) {
-    const res =await update(filter,{isActive:false})
+    const res = await update(filter, { isActive: false })
     // console.log(res);
 }
 
@@ -24,7 +25,7 @@ module.exports = { create, read, update, del }
 let user1 = {
     firstName: "Yonatan",
     lastName: "Ramon",
-    email: "Yon@walla.com",
+    email: "Yokon@walla.com",
     password: "987865",
     address: {
         street: 12,
