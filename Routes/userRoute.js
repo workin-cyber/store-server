@@ -1,13 +1,13 @@
+const express = require("express");
+const router = express.Router();
+const userLogic = require("../BL/userLogic");
 
-const userLogic = require('../BL/userLogic')
+router.get("/", (req, res) => {
+    res.send("Hello World!");
+});
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
-app.get('/user', async (req, res) => {
-
-    let res = await userLogic.bla()
+router.get("/user", async (req, res) => {
+    let reult = await userLogic.bla();
 
     res.send({
         firstName: "Yonatan",
@@ -19,6 +19,8 @@ app.get('/user', async (req, res) => {
             homeNum: 34,
             city: "jerusalem",
         },
-        gender: 'male'
-    })
-})
+        gender: "male",
+    });
+});
+
+module.exports = router;
