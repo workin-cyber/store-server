@@ -3,36 +3,20 @@ require('../db').connect();
 const { userModel } = require('../models/user')
 
 async function create(data) {
-    const res = await userModel.create(data);
-    console.log(res);
+    return await userModel.create(data);
 }
 async function read(filter, proj) {
-    const res = await userModel.find(filter, proj);
-    console.log(res);
+    return await userModel.find(filter, proj);
+}
+
+async function readOne(filter, proj) {
+    return await userModel.findOne(filter, proj);
 }
 async function update(filter, newData) {
-    const res = await userModel.updateOne(filter, newData);
-    console.log(res);
-    return res;
+    return await userModel.updateOne(filter, newData);
 }
 async function del(filter) {
-    const res = await update(filter, { isActive: false })
-    // console.log(res);
+    return await update(filter, { isActive: false })
 }
 
-module.exports = { create, read, update, del }
-
-let user1 = {
-    firstName: "Yonatan",
-    lastName: "Ramon",
-    email: "Yokon@walla.com",
-    password: "987865",
-    address: {
-        street: 12,
-        homeNum: 34,
-        city: "jerusalem",
-    },
-    gender: 'male'
-}
-
-create(user1)
+module.exports = { create, read,readOne, update, del }

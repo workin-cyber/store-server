@@ -1,7 +1,6 @@
 // מטרת קובץ זה :
 // התחברות לשרת MONGO מרוחק - atlas / או לשרת מקומי
 
-// import mongoose from 'mongoose';
 const mongoose = require('mongoose');
 
 const MONGO_URL = 'mongodb+srv://Admin:Admin123@cluster0.zyg0zzq.mongodb.net/test1?retryWrites=true&w=majority'

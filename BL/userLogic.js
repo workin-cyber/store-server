@@ -16,3 +16,18 @@ async function getUserDetailsById(id) {
 //     // many many many validations
 
 // }
+
+let user1 = {
+    firstName: "Yonatan",
+    lastName: "Ramon",
+    email: "Yokon@walla.com",
+    password: "987865",
+    address: {
+        street: 12,
+        homeNum: 34,
+        city: "jerusalem",
+    },
+    gender: 'male'
+}
+
+create(user1)
