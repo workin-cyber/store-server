@@ -1,15 +1,11 @@
-require('../DL/db').connect();
-const userController = require('../DL/controllers/userController')
+const userController = require("../DL/controllers/userController");
 
 async function getUserDetailsById(id) {
+  await userController.create({ email: "Yon@walla.com" });
 
-    await userController.create({ email: "Yon@walla.com" })
-
-    // find
-    // check if null or exist
-    // return error / user {}
-
-
+  // find
+  // check if null or exist
+  // return error / user {}
 }
 
 // async function register() {
@@ -18,18 +14,24 @@ async function getUserDetailsById(id) {
 // }
 
 let user1 = {
-    firstName: "Yonatan",
-    lastName: "Ramon",
-    email: "Yokon@walla.com",
-    password: "987865",
-    address: {
-        street: 12,
-        homeNum: 34,
-        city: "jerusalem",
-    },
-    gender: 'male'
-}
+  firstName: "Yonatan",
+  lastName: "Ramon",
+  email: "Yokon@walla.com",
+  password: "987865",
+  address: {
+    street: 12,
+    homeNum: 34,
+    city: "jerusalem",
+  },
+  gender: "male",
+};
 
-create(user1)
+// create(user1)
 
-exports.bla = () => { return { x: 'y' } }
+exports.getAllUsers = () => {
+  return userController.read({});
+};
+
+exports.createUser = (userFields) => {
+  return userController.create(userFields);
+};
