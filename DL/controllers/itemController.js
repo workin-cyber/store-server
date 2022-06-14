@@ -1,6 +1,4 @@
-// ************ TEMP ****************
-require('../db').connect();
-// ****************************
+
 const { itemModel } = require('../models/item')
 
 async function create(data) {

@@ -1,4 +1,4 @@
-require('../db').connect();
+
 
 const { userModel } = require('../models/user')
 

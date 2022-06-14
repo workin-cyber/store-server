@@ -31,3 +31,5 @@ let user1 = {
 }
 
 create(user1)
+
+exports.bla = () => { return { x: 'y' } }

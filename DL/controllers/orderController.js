@@ -1,4 +1,4 @@
-require('../db').connect();
+
 const { orderModel } = require('../models/order')
 
 async function create(data) {
