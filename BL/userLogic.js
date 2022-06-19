@@ -1,8 +1,8 @@
 const userController = require("../DL/controllers/userController");
 
-async function getUserDetailsById(id) {
-  await userController.create({ email: "Yon@walla.com" });
-
+exports.getUserDetailsById = (id) => {
+  // await userController.create({ email: "Yon@walla.com" });
+  return userController.read({ _id: id })
   // find
   // check if null or exist
   // return error / user {}
@@ -35,3 +35,11 @@ exports.getAllUsers = () => {
 exports.createUser = (userFields) => {
   return userController.create(userFields);
 };
+exports.updateUser = (id, newField) => {
+  return userController.update({ _id: id }, newField);
+
+}
+exports.del = (id) => {
+  return userController.del({ _id: id });
+
+}

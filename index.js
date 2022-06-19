@@ -7,6 +7,7 @@ const router = require("./Routes");
 app.use(express.json());
 app.use(require("cors")());
 
+
 app.use("/api", router);
 
 app.listen(PORT, () => console.log(`server is running => ${PORT}`));

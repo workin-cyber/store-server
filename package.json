@@ -5,7 +5,7 @@
   "main": "db.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },
   "author": "",
@@ -13,9 +13,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "mongoose": "^6.3.5"
-  },
-  "devDependencies": {
+    "mongoose": "^6.3.5",
     "nodemon": "^2.0.16"
-  }
+  },
+  "devDependencies": {}
 }
