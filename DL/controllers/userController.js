@@ -13,10 +13,10 @@ async function readOne(filter, proj) {
     return await userModel.findOne(filter, proj);
 }
 async function update(filter, newData) {
-    return await userModel.updateOne(filter, newData);
+    return await userModel.findOneAndUpdate(filter, newData, { new: true });
 }
 async function del(filter) {
     return await update(filter, { isActive: false })
 }
 
-module.exports = { create, read,readOne, update, del }
+module.exports = { create, read, readOne, update, del }
