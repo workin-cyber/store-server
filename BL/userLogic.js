@@ -23,5 +23,16 @@ async function get(id) {
   return result
 }
 
+async function update(id, newData) {
+  const updatedUser = await userController.update({ _id: id }, newData)
+  return updatedUser
+}
 
-module.exports = { register, get }
+async function del(id) {
+  const deletedUser = await userController.del({ _id: id })
+  return deletedUser
+}
+
+
+
+module.exports = { register, get, update, del }

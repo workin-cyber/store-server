@@ -33,6 +33,34 @@ router.get("/:id?", async (req, res) => {
   }
 })
 
+router.put("/:id", async (req, res) => {
+  try {
+    const result = await userLogic.update(req.params.id, req.body)
+    res.status(200).send(result)
+  } catch (error) {
+    console.log("get", error);
+    if (error.code && error.code < 1000) {
+      res.status(error.code).send(error.message)
+    } else {
+      res.send("something went wrong")
+    }
+  }
+})
+
+router.delete("/:id", async (req, res) => {
+  try {
+    await userLogic.del(req.params.id)
+    res.status(200).send("deleted")
+  } catch (error) {
+    console.log("get", error);
+    if (error.code && error.code < 1000) {
+      res.status(error.code).send(error.message)
+    } else {
+      res.send("something went wrong")
+    }
+  }
+})
+
 
 // router.get("/", async (req, res) => {
 //   const users = await userLogic.getAllUsers();
