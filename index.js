@@ -1,10 +1,14 @@
+require("dotenv").config()
+
 const
   express = require("express"),
   app = express(),
-  PORT = 3001
+  PORT = process.env.PORT || 3001
 
 app.use(require("cors")())
 app.use(express.json())
+
+
 
 const mainRouter = require("./Routes")
 app.use("/api", mainRouter)
