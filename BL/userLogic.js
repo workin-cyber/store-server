@@ -13,5 +13,15 @@ async function register(data) {
   return true
 }
 
+async function get(id) {
+  const result = id ?
+    await userController.readOne({ _id: id }) :
+    await userController.read({})
 
-module.exports = { register }
+  if (!result) throw ({ code: 404, message: "not found" })
+
+  return result
+}
+
+
+module.exports = { register, get }

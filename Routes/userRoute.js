@@ -4,14 +4,27 @@ const userLogic = require("../BL/userLogic");
 const { read } = require("../DL/controllers/userController");
 
 
-router.post("/register/:theking", async (req, res) => {
-  console.log("req body", req.body);
-  console.log("req params", req.params)
-  console.log("req query", req.query)
+router.post("/register", async (req, res) => {
   try {
     const result = await userLogic.register(req.body)
     res.status(200).send("success")
+
   } catch (error) {
+    console.log("register", error);
+    if (error.code && error.code < 1000) {
+      res.status(error.code).send(error.message)
+    } else {
+      res.send("something went wrong")
+    }
+  }
+})
+
+router.get("/:id?", async (req, res) => {
+  try {
+    const result = await userLogic.get(req.params.id)
+    res.status(200).send(result)
+  } catch (error) {
+    console.log("get", error);
     if (error.code && error.code < 1000) {
       res.status(error.code).send(error.message)
     } else {
