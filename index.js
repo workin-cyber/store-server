@@ -1,16 +1,15 @@
-const express = require("express"),
+const
+  express = require("express"),
   app = express(),
-  PORT = 3001;
+  PORT = 3001
 
-const router = require("./Routes");
+app.use(require("cors")())
+app.use(express.json())
 
-app.use(express.json());
-app.use(require("cors")());
+const mainRouter = require("./Routes")
+app.use("/api", mainRouter)
 
-
-app.use("/api", router);
-
-app.listen(PORT, () => console.log(`server is running => ${PORT}`));
+app.listen(PORT, () => console.log(`server runing on port ${PORT}`))
 require("./DL/db").connect();
 
 //GET - www.loc.com
