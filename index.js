@@ -8,8 +8,6 @@ const
 app.use(require("cors")())
 app.use(express.json())
 
-
-
 const mainRouter = require("./Routes")
 app.use("/api", mainRouter)
 

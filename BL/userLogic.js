@@ -1,4 +1,5 @@
 const userController = require("../DL/controllers/userController");
+const jwtFn = require("./jwt")
 
 async function register(data) {
   const { email, password, firstName, lastName } = data
@@ -10,7 +11,8 @@ async function register(data) {
   if (existUser) throw ({ code: 405, message: "duplicated email" })
 
   const user = await userController.create(data)
-  return true
+  const token = jwtFn.createToken(user._id)
+  return token
 }
 
 async function get(id) {

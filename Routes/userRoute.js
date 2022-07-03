@@ -14,8 +14,8 @@ const userLogic = require("../BL/userLogic");
 router.post("/register", async (req, res) => {
 
   try {
-    const result = await userLogic.register(req.body)
-    res.status(200).send("success")
+    const token = await userLogic.register(req.body)
+    res.status(200).send({ token })
 
   } catch (error) {
     console.log("register", error);
