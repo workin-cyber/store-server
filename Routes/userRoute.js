@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userLogic = require("../BL/userLogic");
+const { authJWT } = require("../middleware/auth");
 
 // function loger(req, res, next) {
 //   console.log("work 1")
@@ -27,8 +28,18 @@ router.post("/register", async (req, res) => {
   }
 })
 
-router.get("/:id?", async (req, res) => {
-  console.log("work 1.5")
+router.post("/login", async (req, res) => {
+  try {
+    const userToken = await userLogic.login(req.body)
+    res.send(userToken)
+  } catch (e) {
+    res.send(e.message)
+  }
+})
+
+router.get("/:id?", authJWT, async (req, res) => {
+
+  console.log(req._id)
 
   try {
     const result = await userLogic.get(req.params.id)

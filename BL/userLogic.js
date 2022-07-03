@@ -1,6 +1,19 @@
 const userController = require("../DL/controllers/userController");
-const jwtFn = require("./jwt")
+const jwtFn = require("../middleware/jwt")
 
+async function login(body) {
+  let password = body.password;
+  let email = body.email;
+  let user = await userController.readOne({ email: email }, "+password");
+  if (!user) throw ({ code: 401, message: " unauthorized" })
+  if (!user.password === password) throw ({ code: 401, message: " unauthorized" })//bcrypt.compare
+  const token = jwtFn.createToken(user._id)
+  return token
+
+
+
+
+}
 async function register(data) {
   const { email, password, firstName, lastName } = data
 
@@ -37,4 +50,4 @@ async function del(id) {
 
 
 
-module.exports = { register, get, update, del }
+module.exports = { register, get, update, del, login }

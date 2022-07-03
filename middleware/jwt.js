@@ -9,4 +9,5 @@ function validateToken(token) {
    return jwt.verify(token, secret)
 }
 
+
 module.exports = { createToken, validateToken }

@@ -3,7 +3,7 @@
 
 const mongoose = require('mongoose');
 
-const MONGO_URL = 'mongodb+srv://Admin:Admin123@cluster0.zyg0zzq.mongodb.net/test1?retryWrites=true&w=majority'
+const MONGO_URL = process.env.MONGO_URL
 
 const connect = async () => {
     try {
