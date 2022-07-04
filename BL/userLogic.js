@@ -4,9 +4,10 @@ const jwtFn = require("../middleware/jwt")
 async function login(body) {
   let password = body.password;
   let email = body.email;
-  let user = await userController.readOne({ email: email }, "+password");
+  let user = await userController.readOne({ email: email }, "password");
+  console.log("🚀 ~ file: userLogic.js ~ line 8 ~ login ~ user", user)
   if (!user) throw ({ code: 401, message: " unauthorized" })
-  if (!user.password === password) throw ({ code: 401, message: " unauthorized" })//bcrypt.compare
+  if (user.password !== password) throw ({ code: 401, message: " unauthorized" })//bcrypt.compare
   const token = jwtFn.createToken(user._id)
   return token
 

@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
     const userToken = await userLogic.login(req.body)
     res.send(userToken)
   } catch (e) {
-    res.send(e.message)
+    res.status(e.code).send(e.message)
   }
 })
 
@@ -55,7 +55,7 @@ router.get("/:id?", authJWT, async (req, res) => {
 })
 
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authJWT, async (req, res) => {
   try {
     const result = await userLogic.update(req.params.id, req.body)
     res.status(200).send(result)
@@ -69,7 +69,7 @@ router.put("/:id", async (req, res) => {
   }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authJWT, async (req, res) => {
   try {
     await userLogic.del(req.params.id)
     res.status(200).send("deleted")
