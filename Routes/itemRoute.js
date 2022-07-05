@@ -1,8 +1,9 @@
 const express = require('express'),
     router = express.Router(),
-    itemLogic = require('../BL/itemLogic');
+    itemLogic = require('../BL/itemLogic'),
+    { authJWT } = require('../middleware/auth')
 
-router.get('/', async (req, res) => {
+router.get('/', authJWT , async (req, res) => {
     try {
         const result = await itemLogic.getAllItems()
         res.send(result)
