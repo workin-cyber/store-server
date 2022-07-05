@@ -1,10 +1,7 @@
-const item1 = {
-    name: 'Cisco 48 port',
-     price: 125,
-     barcode: "12RJ7E1",
-     description: 'Cisco Switch +managment ',
-     category: 'Networks',
-     inStock: 5,
- }
- 
- create(item1)
+const itemController = require('../DL/controllers/itemController')
+
+async function getAllItems(){
+    return await itemController.read()
+}
+
+module.exports = {getAllItems}

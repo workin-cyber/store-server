@@ -4,7 +4,7 @@ const { itemModel } = require('../models/item')
 async function create(data) {
     return await itemModel.create(data);
 }
-async function read(filter, proj) {
+async function read(filter={}, proj) {
     return await itemModel.find(filter, proj);
 }
 
