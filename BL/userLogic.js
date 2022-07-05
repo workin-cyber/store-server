@@ -1,35 +1,54 @@
-require('../DL/db').connect();
-const userController = require('../DL/controllers/userController')
+const userController = require("../DL/controllers/userController");
+const jwtFn = require("../middleware/jwt")
 
-async function getUserDetailsById(id) {
+async function login(body) {
+  let password = body.password;
+  let email = body.email;
+  let user = await userController.readOne({ email: email }, "password");
+  console.log("🚀 ~ file: userLogic.js ~ line 8 ~ login ~ user", user)
+  if (!user) throw ({ code: 401, message: " unauthorized" })
+  if (user.password !== password) throw ({ code: 401, message: " unauthorized" })//bcrypt.compare
+  const token = jwtFn.createToken(user._id)
+  return token
 
-    await userController.create({ email: "Yon@walla.com" })
 
-    // find
-    // check if null or exist
-    // return error / user {}
 
 
 }
+async function register(data) {
+  const { email, password, firstName, lastName } = data
 
-// async function register() {
-//     // many many many validations
+  if (!email || !password || !firstName || !lastName)
+    throw ({ code: 400, message: "missing data" })
 
-// }
+  const existUser = await userController.readOne({ email })
+  if (existUser) throw ({ code: 405, message: "duplicated email" })
 
-let user1 = {
-    firstName: "Yonatan",
-    lastName: "Ramon",
-    email: "Yokon@walla.com",
-    password: "987865",
-    address: {
-        street: 12,
-        homeNum: 34,
-        city: "jerusalem",
-    },
-    gender: 'male'
+  const user = await userController.create(data)
+  const token = jwtFn.createToken(user._id)
+  return token
 }
 
-create(user1)
+async function get(id) {
+  const result = id ?
+    await userController.readOne({ _id: id }) :
+    await userController.read({})
 
-exports.bla = () => { return { x: 'y' } }
+  if (!result) throw ({ code: 404, message: "not found" })
+
+  return result
+}
+
+async function update(id, newData) {
+  const updatedUser = await userController.update({ _id: id }, newData)
+  return updatedUser
+}
+
+async function del(id) {
+  const deletedUser = await userController.del({ _id: id })
+  return deletedUser
+}
+
+
+
+module.exports = { register, get, update, del, login }
