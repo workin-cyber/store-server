@@ -3,8 +3,9 @@ const express = require('express'),
     itemLogic = require('../BL/itemLogic'),
     { authJWT } = require('../middleware/auth')
 
-router.get('/', authJWT , async (req, res) => {
+router.get('/', async (req, res) => {
     try {
+        // check permission / token
         const result = await itemLogic.getAllItems()
         res.send(result)
     }
@@ -12,5 +13,15 @@ router.get('/', authJWT , async (req, res) => {
         res.send(err)
     }
 })
+
+const x = async (req, res, next) => {
+    console.log("bla bla");
+    next()
+}
+
+router.get('/items',x , async (req, res) => {
+
+})
+
 
 module.exports = router;

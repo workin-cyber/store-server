@@ -49,6 +49,18 @@ async function del(id) {
   return deletedUser
 }
 
+async function login2(data) {
+  // check if user exist (by email)
+  const user = await userController.readOne({ email: data.email }, '+password')
+  if (!user) throw { code: 420, msg: "User or password is incorrect" }
 
+  // check if passwords is equals
+  if (user.password !== data.password) throw { code: 450, msg: "User or password is incorrect" }
 
-module.exports = { register, get, update, del, login }
+  return jwtFn.createToken(user._id)
+  
+  
+
+}
+
+module.exports = { register, get, update, del, login, login2 }
